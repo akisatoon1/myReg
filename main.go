@@ -11,8 +11,12 @@ import "fmt"
 
 func main() {
 	fmt.Println("Integration Test:")
-	fmt.Println(buildNFA(parseRegExp("a?((b+c)*?a)?b")).match("abbcbbccab") == true)
-	fmt.Println(buildNFA(parseRegExp("a?((b+c)*?a)?b")).match("aab") == true)
-	fmt.Println(buildNFA(parseRegExp("a?((b+c)*?a)?b")).match("abbcbbccabc") == false)
-	fmt.Println(buildNFA(parseRegExp("a?((b+c)*?a)?b")).match("abbcbbccb") == false)
+	fmt.Println(matchString("a?((b+c)*?a)?b", "abbcbbccab") == true)
+	fmt.Println(matchString("a?((b+c)*?a)?b", "aab") == true)
+	fmt.Println(matchString("a?((b+c)*?a)?b", "abbcbbccabc") == false)
+	fmt.Println(matchString("a?((b+c)*?a)?b", "abbcbbccb") == false)
+}
+
+func matchString(regexp string, str string) bool {
+	return buildNFA(parseRegExp(regexp)).match(str)
 }
