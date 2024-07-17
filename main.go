@@ -18,5 +18,9 @@ func main() {
 }
 
 func matchString(regexp string, str string) bool {
-	return buildNFA(parseRegExp(regexp)).match(str)
+	return compile(regexp).match(str)
+}
+
+func compile(regexp string) *NFA {
+	return buildNFA(parseRegExp(regexp))
 }
